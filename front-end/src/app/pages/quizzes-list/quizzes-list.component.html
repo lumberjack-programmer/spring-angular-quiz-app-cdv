@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
+  <a class="navbar-brand" style="margin-left: 20px;" routerLink="/quizzes-list">Quiz</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/quizzes-list">All quizzess</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Results</a>
+      </li>
+    </ul>
+  </div>
+  <ul class="navbar-nav" style="margin-right: 20px; cursor: pointer;">
+    <li class="nav-item">
+      <a (click)="onLogOut()" class="nav-link">Log out</a>
+    </li>
+  </ul>
+</nav>
+<div *ngIf="!loading; else showloading">
+<div>
+  <nav class="navbar">
+    <div class="container-fluid">
+
+      <div class="d-flex">
+        <div class="dropdown-center">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Order by
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Title</a></li>
+            <li><a class="dropdown-item" href="#">Category</a></li>
+            <li><a class="dropdown-item" href="#">Time</a></li>
+            <li><a class="dropdown-item" href="#">Date</a></li>
+          </ul>
+        </div>
+      </div>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+    </div>
+  </nav>
+</div>
+<table *ngIf="!hasError; else showerror" class="table">
+  <thead>
+    <tr style="background-color: #0071feff; color:rgb(255, 255, 255)">
+      <th class="p-3 w-25">Title</th>
+      <th class="p-3">Category</th>
+      <th class="p-3">Time limited</th>
+      <th class="p-3">Time</th>
+      <th class="p-3">Created</th>
+      <th class="p-3">Number of questions</th>
+      <th class="p-3" style="width: 130px; margin-right: 10px"></th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let quiz of quizzessList; let i = index;">
+    <tr>
+      <td>{{ quiz.title }}</td>
+      <td>{{ quiz.category }}</td>
+      <td>{{ quiz.timeLimit.timeLimitEnabled }}</td>
+      <td>{{ quiz.timeLimit.time }}</td>
+      <td>{{ quiz.createdAt }}</td>
+      <td>{{ quiz.questions.length }}</td>
+      <td class="mx-auto"><button (click)="navigateToQuizInterface(i)"  type="button" class="btn btn-primary">Start Quiz</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="empty-quiz-list" *ngIf="isQuizListEmpty">
+  <img src="/assets/undraw_empty_re_opql.svg" alt="empty quiz list">
+  <h1>No quizzess have been created yet</h1>
+</div>
+<ng-template #showloading>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+</ng-template>
+<ng-template #showerror>
+  <app-error></app-error>
+</ng-template>
+

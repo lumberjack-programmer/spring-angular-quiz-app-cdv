@@ -1,0 +1,66 @@
+<div class="container">
+  <form [formGroup]="registrationFormGroup" class="row d-flex text-center align-items-center" style="height: 100vh;">
+    <div class="col-md-6 mx-auto">
+      <div class="gx-3 gy-2 mb-5">
+        <h4 class="text-center">SIGN UP</h4>
+      </div>
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="first-name">First Name</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="firstName" type="text" class="form-control" id="first-name" placeholder="First Name">
+        </div>
+      </div>
+
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="last-name">Last Name</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="lastName" type="text" class="form-control" id="last-name" placeholder="Last Name">
+        </div>
+      </div>
+
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="email">Email</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+      </div>
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="username">Username</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="username" type="text" class="form-control" id="username" placeholder="Username">
+        </div>
+      </div>
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="password">Password</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+      </div>
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="password-repeat">Password</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="passwordRepeat" type="password" class="form-control" id="password-repeat" placeholder="Password">
+        </div>
+      </div>
+      <div class="row gx-3 gy-2 mb-2" *ngIf="hasError">
+        <div class="col-auto auth-failed">
+          {{ errorMessage }}
+        </div>
+      </div>
+      <!-- errorMessage -->
+    <div class="row mb-3">
+          <div class="col-12">
+            <button (click)="onSubmit()" type="submit" class="btn btn-primary custom-btn-width">Submit</button>
+          </div>
+    </div>
+      <span>Have an account? </span><a style="cursor: pointer;" routerLink="/login">Sign in</a>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,86 @@
+<div class="mt-4">
+  <div class="row">
+    <div class="col">
+      <h4>Takes</h4>
+    </div>
+  </div>
+  <hr>
+
+  <div *ngIf="!loading; else showloading">
+  <div>
+    <nav class="navbar ">
+      <div class="container-fluid">
+
+        <div class="d-flex">
+          <div class="dropdown-center">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Order by
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Title</a></li>
+              <li><a class="dropdown-item" href="#">Category</a></li>
+              <li><a class="dropdown-item" href="#">Date</a></li>
+              <li><a class="dropdown-item" href="#">Username</a></li>
+            </ul>
+          </div>
+          <div style="margin-left: 20px;">
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Bulk Delete
+            </button>
+          </div>
+        </div>
+
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+      </div>
+    </nav>
+  </div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+      </div></th>
+      <th scope="col">Quiz Title</th>
+      <th scope="col">Username</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th scope="col">Score</th>
+      <th scope="col">Correct Answers</th>
+      <th scope="col">Time Taken</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let take of quizTakes">
+    <tr style="cursor: pointer;">
+      <td><div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+      </div></td>
+      <td (click)="onNavigateToTakeDetails(take)" scope="row">{{ take.quiz.title }}</td>
+      <td (click)="onNavigateToTakeDetails(take)">{{ take.userName }}</td>
+      <td (click)="onNavigateToTakeDetails(take)">{{ take.startTime }}</td>
+      <td (click)="onNavigateToTakeDetails(take)">{{ take.endTime }}</td>
+      <td (click)="onNavigateToTakeDetails(take)">{{ take.score }}</td>
+      <td (click)="onNavigateToTakeDetails(take)">{{ take.numberCorrectAnswers + '/' + take.userQuestionAnswers.length }}</td>
+      <td (click)="onNavigateToTakeDetails(take)">{{ getTimeTakenFormatted(take.timeTaken) }}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+<div class="empty-quiz-list" *ngIf="isQuizListEmpty">
+  <img src="/assets/undraw_empty_re_opql.svg" alt="empty quiz list">
+  <h1>No quizzess have been taken yet</h1>
+</div>
+</div>
+</div>
+
+<ng-template #showloading>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+</ng-template>

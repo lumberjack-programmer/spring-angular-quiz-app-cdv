@@ -1,0 +1,54 @@
+<div class="container">
+  <form [formGroup]="loginFormGroup" class="row d-flex align-items-center" style="height: 100vh">
+    <div class="col-md-6 mx-auto">
+      <div class="gx-3 gy-2 mb-5">
+        <h4 class="text-center">SIGN IN</h4>
+      </div>
+
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="username">Username</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="username" type="text" class="form-control" id="username" placeholder="Username">
+        </div>
+      </div>
+
+      <div class="row gx-3 gy-2 mb-3">
+        <label class="visually-hidden" for="password">Password</label>
+        <div class="input-group">
+          <div class="input-group-text"></div>
+          <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+      </div>
+
+      <div class="row gx-3 gy-2 mb-2" *ngIf="authenticationFailed">
+        <div class="col-auto auth-failed">
+          An account with that sign-in information does not exist. Try again or create a new account.
+        </div>
+      </div>
+
+      <div class="row gx-3 gy-2 mb-2">
+        <div class="col-auto">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="autoSizingCheck"/>
+            <label class="form-check-label" for="autoSizingCheck">
+              Remember me
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <button (click)="onSubmit()" type="submit" class="btn btn-primary custom-btn-width">
+            Submit
+          </button>
+        </div>
+      </div>
+      <span>Have an account? </span><a style="cursor: pointer;" routerLink="/registration">Sign Up</a>
+    </div>
+  </form>
+</div>

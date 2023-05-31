@@ -1,0 +1,18 @@
+
+<div class="row mb-5 justify-content-center">
+  <div class="col-4">
+  <div class="p-3 link" style="background-color: #0071feff; color:white;"><i class="bi bi-check2-all"></i> Mutli-select</div>
+  </div>
+  <div class="col-4">
+ <div class="p-3 btn-disabled"><i class="bi bi-check2"></i> Single select</div>
+  </div>
+  <div class="col-4">
+    <div class="p-3 btn-disabled">True/False</div>
+  </div>
+</div>
+
+<ng-container *ngFor="let optionForm of optionsFormGroup; let i = index;">
+  <app-option-component (optionToBeRemoved)="onRemoveOption(i)" (questionFormUpdated)="onQuestionFormUpdate(i, $event)" [code]="optionCodes[i]" [formGroup]="optionForm"></app-option-component>
+</ng-container>
+
+<div (click)="onAddOption()" class="p-3 mt-3 btn-add">Add Option</div>

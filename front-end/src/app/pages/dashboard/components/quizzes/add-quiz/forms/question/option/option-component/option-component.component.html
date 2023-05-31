@@ -1,0 +1,41 @@
+<div class="justify-content-center">
+  <form [formGroup]="questionForm">
+    <div class="d-flex flex-row justify-content-between">
+      <div class="row" style="margin-left: 5px; margin-top:3px;">
+        <div class="col-1">{{ optionCode }}</div>
+        <div class="col-1">
+          <div class="form-check"><input (ngModelChange)="onAnyChange()" formControlName="correctAnswer"
+              class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div>
+        </div>
+      </div>
+
+      <div style="margin-left: 15px;margin-right: 15px;" class="row">
+        <div class="col-3 align-middle">
+          <div (click)="onAddOptionTextInput()" class="option-btn" style="background-color: #0071feff; color:white;"><i
+              class="bi bi-cursor-text"></i></div>
+        </div>
+        <div class="col-3 align-middle">
+          <div (click)="onAddOptionCodeInput()" class="option-btn" style="background-color: #0071feff; color:white;"><i
+              class="bi bi-code-slash"></i></div>
+        </div>
+        <div class="col-3 align-middle">
+          <div class="option-btn" style="background-color: #0071feff; color:white;"><i class="bi bi-image"></i></div>
+        </div>
+        <div class="col-3 align-middle">
+          <div (click)="onRemoveOption()" class="option-btn" style="background-color: #0071feff; color:white;"><i class="bi bi-x-lg"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="optionTextInput" class="mt-3" style="margin-left: 15px;margin-right: 15px;">
+      <input (ngModelChange)="onAnyChange()" formControlName="textInput" type="text" class="form-control" id="title"
+        placeholder="Option text">
+    </div>
+    <br>
+    <div *ngIf="optionCodeInput" class="mt-3" style="margin-left: 15px; margin-right: 15px;">
+      <textarea (ngModelChange)="onAnyChange()" rows="10" placeholder="//Your code here" formControlName="codeInput" spellcheck="false" autocorrect="off"
+        autocapitalize="off" autocomplete="off" style=" width:100%;" class="custom-code mt-3">Code</textarea>
+    </div>
+  </form>
+
+</div>

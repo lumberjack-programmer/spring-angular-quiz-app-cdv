@@ -1,0 +1,115 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" style="margin-left: 20px;" routerLink="/quiz-interface">Quiz</a>
+  <!-- <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/quiz-interface">All quizzess</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Results</a>
+      </li>
+    </ul>
+  </div> -->
+</nav>
+
+<div *ngIf="!loading else showloading">
+  <div *ngIf="!hasError; else showerror">
+<div class="container mt-5 mb-5" style="width: 60%;">
+  <div style="margin-left: 10px; margin-right: 10px;">
+    <div class="d-flex flex-row justify-content-between quiz-header">
+      <div class="bg-gray">
+        <h4>Question {{ currentQuestion + 1 }} of {{ quizQuestions.length }}</h4>
+      </div>
+      <div *ngIf="quiz.timeLimit.timeLimitEnabled && hours != '--'" class="d-flex">
+        <div class="bg-gray bl-white">
+          <h4>{{ hours }}</h4>
+        </div>
+        <div class="bg-gray bl-white">
+          <h4>{{ minutes }}</h4>
+        </div>
+        <div class="bg-gray bl-white">
+          <h4>{{ seconds }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Qiestion -->
+  <div *ngIf="quizQuestions[currentQuestion].questionText" style="margin-left: 10px; margin-right: 10px;">
+    <div class="quiz-header">
+      <div class="bg-gray bl-white">
+        <h5>{{ quizQuestions[currentQuestion].questionText }}</h5>
+      </div>
+    </div>
+  </div>
+<!-- Code -->
+  <div *ngIf="quizQuestions[currentQuestion].questionCode" style="margin-left: 10px; margin-right: 10px;">
+    <div class="quiz-header">
+      <pre><code class="custom-code custom-code-simple">{{ quizQuestions[currentQuestion].questionCode }}</code></pre>
+    </div>
+  </div>
+<!-- Info about type of question -->
+  <div style="margin-left: 10px; margin-right: 10px;">
+    <div class="quiz-header">
+      <p>Type of question: Multinle select</p>
+    </div>
+  </div>
+
+  <!-- Option including text and code -->
+  <div [formGroup]="optionsFormGroupList[currentQuestion]">
+  <div *ngFor="let option of quizQuestions[currentQuestion].options; let i = index">
+    <div (click)="onSelectOption(currentQuestion, i)" class="option">
+    <div class="d-flex">
+      <div class="quiz-header" style="width: 50px;">{{ optionCodes[i] }}</div>
+      <div class="quiz-header" style="width: 100%">
+  <!-- *ngIf="option.textInput" -->
+        <div class="form-check">
+          <input formControlName="{{ i }}" class="form-check-input" type="checkbox" value="true">
+          <label class="form-check-label">
+            {{ option.textInput ? option.textInput : '' }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="option.codeInput" class="d-flex">
+      <div class="quiz-header" style="width: 100%">
+        <pre>
+        <code class="custom-code custom-code-simple" style="background-color: transparent;">{{ option.codeInput }}</code>
+      </pre>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div style="margin-left: 10px; margin-right: 10px;">
+  <div class="quiz-header d-flex justify-content-between">
+    <div >
+      <button (click)="onBackQuestion()" class="p-3 btn-add" type="submit"><i class="bi bi-caret-left-fill"></i> Back</button>
+    </div>
+    <div *ngIf="!showFinishButton">
+      <button (click)="onNextQuestion()" class="p-3 btn-add" type="submit">Next <i class="bi bi-caret-right-fill"></i></button>
+    </div>
+    <div *ngIf="showFinishButton">
+      <button (click)="onFinish()" class="p-3 btn-add" type="submit"><i class="bi bi-journal-check"></i> Finish</button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<ng-template #showloading>
+  <div class="loading">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #showerror>
+  <app-error></app-error>
+</ng-template>
+
+

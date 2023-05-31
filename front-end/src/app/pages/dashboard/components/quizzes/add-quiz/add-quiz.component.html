@@ -1,0 +1,70 @@
+<!--
+    private List<Question> questions = new ArrayList<>(); -->
+<div class="row">
+  <div class="mt-4">
+    <h4>Add new quiz</h4>
+  </div>
+</div>
+<hr>
+<form class="text-center" [formGroup]="quizFormGroup">
+  <div class="mb-3 row mt-5">
+    <label for="title" class="col-sm-2 col-form-label">Quiz title</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" formControlName="title" id="title" placeholder="Title">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="title" class="col-sm-2 col-form-label">Category</label>
+    <div class="col-sm-9">
+      <select class="form-select" aria-label="Category" formControlName="category">
+        <option selected>Java</option>
+        <option value="AWS">AWS</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Python">Python</option>
+        <option value="Sap">SAP</option>
+      </select>
+    </div>
+  </div>
+</form>
+
+<div class="mb-5 row text-center">
+  <label  for="title" class="col-sm-2 col-form-label">Time limit</label>
+  <div class="col-sm-10">
+    <div class="d-flex">
+      <div class="form-check">
+        <input class="form-check-input" (click)="onCheckboxChange()" [(ngModel)]="timePickerDisabled" type="checkbox">
+      </div>
+      <div style="margin-left: 50px;">
+        <ngb-timepicker [(ngModel)]="time" (ngModelChange)="onUpdateTime()" [seconds]="seconds" [disabled]="!timePickerDisabled"></ngb-timepicker>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<form class="text-center" [formGroup]="questionForm">
+  <div class="mb-5" style="border: 1px solid #c6c6c6;">
+
+    <ng-container *ngFor="let question of arrayOfQuestionsAsFormGroups; let i = index">
+        <div class="mt-3">
+          <h4>Question {{ i + 1 }}</h4>
+        </div>
+          <app-question (questionFormUpdated)="onQuestionFormUpdated(i, $event)" [formGroup]="question"></app-question>
+    </ng-container>
+  </div>
+
+  <div class="mb-5 mt-5 row d-flex justify-content-center">
+    <div class="col-sm-4">
+      <div (click)="addQuestion()" class="p-3 btn-add"><i class="bi bi-question-square-fill"></i>  Add question</div>
+    </div>
+    <div class="col-sm-4">
+      <button (click)="onSubmit()" class="p-3 btn-add" type="submit"><i class="bi bi-play-fill"></i> Submit Quiz</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+

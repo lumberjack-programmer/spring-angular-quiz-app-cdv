@@ -1,0 +1,19 @@
+.custom-list {
+  position: relative;
+  list-style: none;
+  padding: 0;
+}
+.custom-list li {
+  padding: 10px 50px;
+  width: 100%;
+}
+
+.custom-list li:hover {
+  background-color: rgb(34, 133, 253);
+  cursor: pointer;
+}
+
+.custom-list li a {
+  text-decoration: none;
+  color: white;
+}

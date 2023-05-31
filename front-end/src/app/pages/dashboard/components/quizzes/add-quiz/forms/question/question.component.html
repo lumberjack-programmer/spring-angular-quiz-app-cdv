@@ -1,0 +1,40 @@
+<form class="row justify-content-center" style="margin-bottom: 50px;" [formGroup]="questionForm">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div #textInputButton (click)="onAddTextInput()" class="p-3 btn-add">
+        <i class="bi bi-cursor-text"></i> {{ textInputButtonLabel }}
+      </div>
+    </div>
+    <div class="col-4">
+      <div #codeInputButton (click)="onAddCodeInput()" class="p-3 btn-add">
+        <i class="bi bi-code-slash"></i> {{ codeInputButtonLabel }}
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="p-3 btn-disabled"><i class="bi bi-image"></i> Add Image</div>
+    </div>
+
+    <div *ngIf="textInputState" class="col-11 mt-3">
+      <input (ngModelChange)="onAnyChange()" formControlName="questionText" type="text" class="form-control" id="title"
+        placeholder="Question">
+    </div>
+
+    <div *ngIf="codeInputState" class="col-11">
+      <textarea (ngModelChange)="onAnyChange()" placeholder="//Your code here" rows="10" formControlName="questionCode"
+        spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off" style="width:100%;"
+        class="custom-code mt-3">Code</textarea>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row justify-content-center">
+    <div class="mb-5 col-8" style="border: 1px solid #c6c6c6; padding: 0;">
+      <app-option (questionFormUpdated)="onQuestionFormUpdate($event)" [formGroup]="questionForm"
+        class="col-9 mt-2 justify-content-center"></app-option>
+    </div>
+  </div>
+
+  <hr>
+</form>
